@@ -1,4 +1,5 @@
 import {ProductModel} from "../models/products.js";
+import {UserModel} from "../models/user.js";
 import express from "express"
 import mongoose from "mongoose";
 
@@ -18,6 +19,17 @@ router.post("/", async (req,res) => {
         const response = await product.save()
         res.json(response)
     }catch(err){
+        console.log(err)
+    }
+})
+router.put("/", async (req,res) => {
+    try{
+        const product = await ProductModel.findById(req.body.id);
+        const user = await UserModel.findById(req.body.userId);
+        user.userCart.push(product)
+        await user.save()
+        res.json({userCart: user.userCart})
+    } catch (err){
         console.log(err)
     }
 })
