@@ -5,6 +5,8 @@
 .front-page-container{
     height: 100vh;
     position: relative;
+    background: rgb(0,0,0);
+    background: linear-gradient(90deg, rgba(0,0,0,1) 17%, rgba(20,160,255,1) 100%);
 }
 .front-page{
     display: flex;
@@ -16,10 +18,52 @@
     display: grid;
     gap: 100px;
 }
+.left img{
+    filter: drop-shadow(1px 0px 10px#14a0ff);
+    animation: glow 5s infinite;
+    height: 38vw;
+}
 .moto{
     display: grid;
     gap: 50px;
+    margin-bottom: 50px;
 }
+.right{
+    display: grid;
+    gap:20px
+}
+.button {
+  width: 180px;
+  height: 40px;
+  background-image: linear-gradient(90deg, rgba(0,0,0,1) 3%, rgba(20,160,255,1) 100%);
+  border: none;
+  border-radius: 50px;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  cursor: pointer;
+  box-shadow: 1px 3px 0px rgb(0, 0, 0);
+  transition-duration: .3s;
+}
+
+.cartIcon {
+  width: 14px;
+  height: fit-content;
+}
+
+.cartIcon path {
+  fill: white;
+}
+
+.button:active {
+  transform: translate(2px ,0px);
+  box-shadow: 0px 1px 0px rgb(120, 160, 255,1);
+  padding-bottom: 1px;
+}
+
 .navbar{
     display: flex;
     position: absolute;
@@ -32,8 +76,34 @@
 }
 .navbar img{
     height: 5vw;
+    
 }
+.personal-info{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.profile,
 .cart{
     display: flex;
+    gap: 10px;
     align-items: center;
+}
+.profile{
+    padding-right: 20px;
+}
+.profile img{
+    height: 3vw;
+}
+
+@keyframes glow{
+    0%{
+        filter: drop-shadow(1px 0px 10px#14a0ff);
+    }
+    50%{
+        filter: drop-shadow(1px 0px 20px#14a0ff);
+    }
+    100%{
+        filter: drop-shadow(1px 0px 10px#14a0ff);
+    }
 }
