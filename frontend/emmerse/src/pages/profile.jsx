@@ -2,12 +2,14 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import useGetUserId from "../hooks/getUserId.js";
+import { useNavigate } from "react-router-dom";
 import pfp from "../Images/user.png";
 
 const Profile = () => {
   const [cookies, setCookies] = useCookies(["access_token"]);
   const [userData, setUserData] = useState();
   const [editedUserData, setEditedUserData] = useState();
+  const navigate = useNavigate();
   const userID = useGetUserId();
 
   const fetchUserData = async () => {

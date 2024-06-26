@@ -2,22 +2,23 @@ import React, {useState} from 'react'
 import '../css/auth.css'
 import axios from 'axios'
 import {useCookies} from'react-cookie'
+import { useNavigate } from 'react-router-dom'
 import Profile from './profile'
 
 
 const Auth = () => {
     const [cookies, setCookies] = useCookies(["access_token"]);
+    
 
   return (
     <div className="auth-container">
-      {!cookies.access_token ? (
-        <div className='auth'>
-          <Register />
-          <Login />
-        </div>
-      ) : (
-        <Profile/>
-      )}
+          <div className="authentication-title">
+            <h1>Authentication</h1>
+          </div>
+          <div className="reg-log">
+            <Register />
+            <Login />
+          </div>
     </div>
   );
 }
@@ -54,6 +55,7 @@ const Register = () => {
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const [_, setCookies] = useCookies(["access_token"]);
 
@@ -74,7 +76,9 @@ const Login = () => {
           );
           return;
         }
+        navigate("/profile");
         alert("You are now logged in");
+        
       } catch (err) {
         console.log(err);
       }
@@ -102,27 +106,27 @@ const Form = ({
   onSubmit,
 }) => {
   return (
-    <div className="auth-container">
+    <div className="auth">
       <form onSubmit={onSubmit}>
         <h2> {label} </h2>
         <div className="form-group">
-          <label htmlFor="username">Username:</label>
           <input
             type="text"
             id="username"
+            placeholder='Username'
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Password:</label>
           <input
             type="password"
             id="password"
+            placeholder='Password'
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
 
-        <button type="submit">{label}</button>
+        <button className="btn" type="submit">{label}</button>
       </form>
     </div>
   );
