@@ -44,4 +44,32 @@ router.post("/login", async (req, res) => {
   res.json({ token, userID: user._id });
 });
 
+router.get("/:userID", async (req, res) => {
+  const { userID } = req.params; // Get the user ID from the request parameters
+
+  try {
+    const user = await UserModel.findById(userID); // Find the user by ID
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json(user); // Send the user as a JSON response
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching user", error });
+  }
+});
+
+router.put("/:id", async (req, res) => {
+  try {
+    const updatedUser = await UserModel.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+
 export { router as userRouter };

@@ -1,6 +1,7 @@
 import React from 'react'
 import shoppingIcon from '../Images/shopping-icon.svg'
 import user from "../Images/user.png";
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
@@ -9,12 +10,16 @@ const Navbar = () => {
         <h1>Emmerse</h1>
         <div className="personal-info">
           <div className="cart">
-            <p>My Cart</p>
-            <img src={shoppingIcon} alt="shopping-icon" />
+            <Link>
+              <p>My Cart</p>
+              <img src={shoppingIcon} alt="shopping-icon" />
+            </Link>
           </div>
           <div className="profile">
-            <p>My Profile</p>
-            <img src={user} alt="user-icon" />
+            <Link to="/auth">
+              <p>My Profile</p>
+              <img src={user} alt="user-icon" />
+            </Link>
           </div>
         </div>
       </div>
