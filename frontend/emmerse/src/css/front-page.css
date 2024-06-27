@@ -20,7 +20,7 @@
 }
 .left img{
     filter: drop-shadow(1px 0px 10px#14a0ff);
-    animation: glow 5s infinite;
+    animation: glow 3s infinite;
     height: 38vw;
 }
 .moto{
@@ -96,6 +96,9 @@
 }
 .profile img{
     height: 3vw;
+}
+.shop-button a{
+    text-decoration: none;
 }
 
 @keyframes glow{

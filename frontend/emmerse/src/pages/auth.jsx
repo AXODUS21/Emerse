@@ -2,23 +2,28 @@ import React, {useState} from 'react'
 import '../css/auth.css'
 import axios from 'axios'
 import {useCookies} from'react-cookie'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import Profile from './profile'
 
 
+
 const Auth = () => {
-    const [cookies, setCookies] = useCookies(["access_token"]);
-    
+    const [cookies, setCookies] = useCookies(["access_token"])
 
   return (
     <div className="auth-container">
-          <div className="authentication-title">
-            <h1>Authentication</h1>
-          </div>
-          <div className="reg-log">
-            <Register />
-            <Login />
-          </div>
+      <div className="back-to-home-btn">
+        <Link to="/">
+          <button role="button">Back To Home</button>
+        </Link>
+      </div>
+      <div className="authentication-title">
+        <h1>Authentication</h1>
+      </div>
+      <div className="reg-log">
+        <Register />
+        <Login />
+      </div>
     </div>
   );
 }

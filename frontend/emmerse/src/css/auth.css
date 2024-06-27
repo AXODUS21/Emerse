@@ -1,10 +1,9 @@
 /*AUTH CSS*/
 .auth-container{
     height: 80vh;
-    
 }
 .authentication-title{
-    padding-top: 40px;
+    padding-top: 30px;
     display: flex;
     justify-content: center;
 }
@@ -18,7 +17,7 @@
     display: grid;
     text-align: center;
     gap: 25px;
-    border: 15px black solid;
+    border: 1.3vw black solid;
     border-radius: 10px;
     padding: 6vw;
 }
