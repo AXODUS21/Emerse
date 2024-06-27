@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import useGetUserId from "../hooks/getUserId.js";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import pfp from "../Images/user.png";
 
 const Profile = () => {
@@ -25,7 +25,7 @@ const Profile = () => {
   const logout = () => {
     setCookies("access_token", "");
     window.localStorage.removeItem("userID");
-    navigate("/auth");
+    navigate("/");
     alert("You have been successfully logged out");
   };
 
@@ -41,6 +41,11 @@ const Profile = () => {
 
   return (
     <div className="profile-container">
+      <div className="back-to-home-btn">
+        <Link to="/">
+          <button role="button">Back To Home</button>
+        </Link>
+      </div>
       <div className="info">
         <img src={pfp} alt="User profile" />
         <h3>{userData?.username}</h3>

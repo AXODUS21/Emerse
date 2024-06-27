@@ -10,7 +10,7 @@ const Navbar = () => {
         <h1>Emmerse</h1>
         <div className="personal-info">
           <div className="cart">
-            <Link>
+            <Link to="/cart">
               <p>My Cart</p>
               <img src={shoppingIcon} alt="shopping-icon" />
             </Link>

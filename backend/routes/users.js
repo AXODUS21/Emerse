@@ -71,5 +71,16 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+//getting the cart of the user
+router.get("/cart/:userID", async (req, res) => {
+  const { userID } = req.params; // Get the user ID from the request parameters
+  try {
+    const user = await UserModel.findById(userID); // Find the user by ID
+    res.json(user.userCart); // Send the user as a JSON response
+  } catch (error) {
+    console.log(error);
+  }
+})
+
 
 export { router as userRouter };

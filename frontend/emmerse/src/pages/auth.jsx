@@ -3,12 +3,17 @@ import '../css/auth.css'
 import axios from 'axios'
 import {useCookies} from'react-cookie'
 import { useNavigate, Link } from 'react-router-dom'
+import useGetUserId from '../hooks/getUserId'
 import Profile from './profile'
 
 
 
 const Auth = () => {
-    const [cookies, setCookies] = useCookies(["access_token"])
+  const userID = useGetUserId()
+  
+  if(userID){
+    return <Profile/>
+  }
 
   return (
     <div className="auth-container">
