@@ -3,6 +3,7 @@ import express from "express";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { ProductModel } from "../models/products.js";
 
 const router = express.Router();
 
@@ -71,7 +72,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-//getting the cart of the user
+//getting the cart(id only) of the user
 router.get("/cart/:userID", async (req, res) => {
   const { userID } = req.params; // Get the user ID from the request parameters
   try {
@@ -79,6 +80,18 @@ router.get("/cart/:userID", async (req, res) => {
     res.json(user.userCart); // Send the user as a JSON response
   } catch (error) {
     console.log(error);
+  }
+});
+
+router.get("/userCart/:userID", async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.params.userID);
+    const userCart = await ProductModel.find({
+      _id: { $in: user.userCart },
+    });
+    res.json({ userCart });
+  } catch (err) {
+    console.log(err);
   }
 })
 

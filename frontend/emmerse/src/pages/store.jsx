@@ -14,10 +14,12 @@ import rating40 from '../Images/ratings/rating-40.png'
 import rating45 from '../Images/ratings/rating-45.png'
 import rating50 from '../Images/ratings/rating-50.png'
 import useGetUserId from '../hooks/getUserId'
+import cartIcon from '../Images/shopping-icon.svg'
 
 const Store = () => {
   const [products, setProducts] = useState([])
   const userID = useGetUserId()
+  const [userCartAmount, setUserCartAmount] = useState([])
 
   const ratingsMap = {
     0: rating0,
@@ -38,32 +40,59 @@ const Store = () => {
     setProducts(response.data)
   }
 
-  useEffect(() => {
-    getProducts()
-  })
-
   const addToCart = async (id) => {
+    if(!userID){
+      alert('Please login to add products to your cart')
+      return;
+    }
     try{
        const response = await axios.put(`http://localhost:5000/products`, {
          userID,
          id,
        });
-       console.log(response);
     } catch(err){
       console.log(err)
     }
-   
   }
+
+  const getCartamount = async () => {
+    if(!userID){
+      return;
+    }
+    try{
+      const response = await axios.get(`http://localhost:5000/users/cart/${userID}`)
+      setUserCartAmount(response.data.length)
+    } catch(err){
+      console.log(err)
+    }
+  }
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+  
+  useEffect(() => {
+    getCartamount();
+  }, [addToCart]);
 
   return (
     <div className="store-container">
-      <div className="back-to-home-btn">
-        <Link to="/">
-          <button role="button">
-            Back To Home
-          </button>
-        </Link>
+      <div className="store-nav">
+        <div className="back-to-home-btn">
+          <Link to="/">
+            <button role="button">Back To Home</button>
+          </Link>
+        </div>
+        <div className="store-cart-btn back-to-home-btn">
+          <Link to="/cart">
+            <button role="button">
+              My Cart <img className="cart-icon" src={cartIcon} />
+            </button>
+          </Link>
+          <div className="notif">{!userID ? 0 : userCartAmount}</div>
+        </div>
       </div>
+
       <div className="store">
         <div className="store-title">
           <h1>Store</h1>
@@ -93,7 +122,10 @@ const Store = () => {
                   )}
                   <p>${product.price.toFixed(2)}</p>
                   <div className="product-buttons">
-                    <button className="CartBtn" onClick={() => addToCart(product._id)}>
+                    <button
+                      className="CartBtn"
+                      onClick={() => addToCart(product._id)}
+                    >
                       <span className="IconContainer">
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +139,7 @@ const Store = () => {
                       </span>
                       <p className="text">Add to Cart</p>
                     </button>
-                    <button className='view-more-button'>View More</button>
+                    <button className="view-more-button">View More</button>
                   </div>
                 </div>
               </div>

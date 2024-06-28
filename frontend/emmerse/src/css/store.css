@@ -151,5 +151,30 @@
 
 .view-more-button{
     font-size: 0.9em;
+    font-weight: 600;
+}
+.store-nav{
+    display: flex;
+    justify-content: space-between;
+}
+.store-cart-btn{
+  position: relative;
+}
+.notif{
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25px;
+  border-radius: 100%;
+  top: 10px;
+  right: 10px;
+  background-color: red;
+  width: 25px;
   font-weight: 600;
+}
+.cart-icon{
+  height: 50px;
+  margin: 0;
+  padding: 0;
 }
