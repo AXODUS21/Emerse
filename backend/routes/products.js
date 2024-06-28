@@ -25,7 +25,7 @@ router.post("/", async (req,res) => {
 router.put("/", async (req,res) => {
     try{
         const product = await ProductModel.findById(req.body.id);
-        const user = await UserModel.findById(req.body.userId);
+        const user = await UserModel.findById(req.body.userID);
         user.userCart.push(product)
         await user.save()
         res.json({userCart: user.userCart})
