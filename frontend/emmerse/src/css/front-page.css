@@ -114,7 +114,7 @@
     transform: rotate(285deg) translate(0px, -90px);
 }
 .t-shirt{
-  transform: rotate(255deg) translate(0px, -90px);
+  transform: rotate(255deg) translate(10px, -90px);
 }
 .headphones{
     transform: rotate(245deg);

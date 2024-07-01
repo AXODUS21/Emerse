@@ -159,4 +159,8 @@
   transform: translateY(0px);
   transition-duration: 0.3s;
 }
-
+.edit-details-container{
+  padding: 10px;
+  display: grid;
+  width: 14vw;
+}

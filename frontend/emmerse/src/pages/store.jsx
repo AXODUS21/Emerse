@@ -15,11 +15,15 @@ import rating45 from '../Images/ratings/rating-45.png'
 import rating50 from '../Images/ratings/rating-50.png'
 import useGetUserId from '../hooks/getUserId'
 import cartIcon from '../Images/shopping-icon.svg'
+import { useNavigate } from 'react-router-dom'
+import Details from './details'
 
 const Store = () => {
   const [products, setProducts] = useState([])
   const userID = useGetUserId()
   const [userCartAmount, setUserCartAmount] = useState([])
+  const navigate = useNavigate()
+
 
   const ratingsMap = {
     0: rating0,
@@ -139,7 +143,12 @@ const Store = () => {
                       </span>
                       <p className="text">Add to Cart</p>
                     </button>
-                    <button className="view-more-button">View More</button>
+                    <button
+                      className="view-more-button"
+                      onClick={() => navigate(`/details?id=${product._id}`)}
+                    >
+                      View More
+                    </button>
                   </div>
                 </div>
               </div>

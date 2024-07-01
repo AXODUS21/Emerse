@@ -94,6 +94,28 @@ router.get("/userCart/:userID", async (req, res) => {
     console.log(err);
   }
 })
+router.put("/number", async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.body.userId);
+    const number = req.body.number;
+    user.contactNumber = number;
+    await user.save();
+    res.json({ contactNumber: user.contactNumber });
+  } catch (err) {
+    console.log(err);
+  }
+});
+router.put("/address", async (req, res) => {
+  try {
+    const user = await UserModel.findById(req.body.userId);
+    const address = req.body.address;
+    user.address = address;
+    await user.save();
+    res.json({ address: user.address });
+  } catch (err) {
+    console.log(err);
+  }
+});
 
 
 
