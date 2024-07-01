@@ -17,6 +17,7 @@
 .left{
     display: grid;
     gap: 100px;
+    position: relative;
 }
 .left img{
     filter: drop-shadow(1px 0px 10px#14a0ff);
@@ -84,7 +85,7 @@
     justify-content: center;
 }
 .profile a,
-.cart a{
+.nav-cart a{
     display: flex;
     gap: 10px;
     align-items: center;
@@ -99,6 +100,27 @@
 }
 .shop-button a{
     text-decoration: none;
+}
+.flying-icons{
+    padding-top: 20px;
+    display: grid;
+    gap: 90px;
+    position: absolute;
+}
+.laptop{
+    transform: rotate(330deg);
+}
+.pants{
+    transform: rotate(285deg) translate(0px, -90px);
+}
+.t-shirt{
+  transform: rotate(255deg) translate(0px, -90px);
+}
+.headphones{
+    transform: rotate(245deg);
+}
+.flying-icons img{
+    height: 70px;
 }
 
 @keyframes glow{

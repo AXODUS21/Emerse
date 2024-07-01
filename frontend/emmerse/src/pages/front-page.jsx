@@ -3,6 +3,10 @@ import '../css/front-page.css'
 import cp from '../Images/cp.svg'
 import Navbar from "../components/navbar";
 import { Link } from 'react-router-dom';
+import laptop from "../Images/front-page-icons/laptop.png";
+import pants from "../Images/front-page-icons/pants.png";
+import TShirt from "../Images/front-page-icons/t-shirt.png";
+import Headphones from "../Images/front-page-icons/headphones.png";
 
 
 const FrontPage = () => {
@@ -13,7 +17,13 @@ const FrontPage = () => {
       </div>
       <div className="front-page">
         <div className="left">
-          <img src={cp} alt="cp" />
+          <div className="flying-icons">
+            <img src={laptop} className="laptop" alt="laptop"/>
+            <img src={pants} className='pants' alt="pants"/>
+            <img src={TShirt} className='t-shirt' alt="t-shirt"/>
+            <img src={Headphones} className="headphones" alt="headphones"/>
+          </div>
+          <img src={cp} alt="cp"/>
         </div>
         <div className="right">
           <div className="moto">

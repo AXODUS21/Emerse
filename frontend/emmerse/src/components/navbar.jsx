@@ -9,7 +9,7 @@ const Navbar = () => {
       <div className="navbar">
         <h1>Emmerse</h1>
         <div className="personal-info">
-          <div className="cart">
+          <div className='nav-cart'>
             <Link to="/cart">
               <p>My Cart</p>
               <img src={shoppingIcon} alt="shopping-icon" />
