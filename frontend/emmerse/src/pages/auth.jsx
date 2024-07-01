@@ -36,6 +36,7 @@ const Auth = () => {
 const Register = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const navigate = useNavigate();
 
     const onSubmit = async (event) => {
       event.preventDefault();
@@ -44,7 +45,9 @@ const Register = () => {
           username,
           password,
         });
-        alert("You have been succesfully registered");
+
+        window.location.reload();
+        alert("You have been succesfully registered, Please Login using your new account!");
       } catch (err) {
         console.error(err);
       }
@@ -86,7 +89,7 @@ const Login = () => {
           );
           return;
         }
-        navigate("/profile");
+        window.location.reload();
         alert("You are now logged in");
         
       } catch (err) {

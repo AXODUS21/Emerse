@@ -35,9 +35,7 @@ const Cart = () => {
   return (
     <div className="cart-container">
       <div className="back-to-home-btn">
-        <Link to="/store">
-          <button>Back To Store</button>
-        </Link>
+          <button onClick={() => navigate(-1)}>&#8592; Return </button>
       </div>
       <div className="cart-title">
         <h1>Cart</h1>
@@ -57,24 +55,38 @@ const Cart = () => {
                       <p>${product.price}</p>
                     </div>
                     <div className="details product-text">
-                        <p>{product.description}</p>
+                      <p>{product.description}</p>
                     </div>
                   </div>
                   <div className="item-buttons">
                     <div className="product-quantity">
                       <h3>Quantity:</h3>
-                      <input type="number" />
+                      <input min="1" type="number" />
                     </div>
-                    <button className='CartBtn'>Remove from cart</button>
+                    <button className="CartBtn">Remove from cart</button>
                   </div>
                 </div>
               </div>
             );
           })}
         </div>
-        <div className="checkout">
-            <h1>CHECKOUT</h1>
-            <button>Checkout</button>
+
+        <div className="checkout-container">
+          <h1>CHECKOUT</h1>
+           <div className="checkout">
+            <div className="checkout-items">
+              {userCart.map((product) => {
+                return (
+                  <div className="checkout-product">
+                    <h4>{product.name}</h4>
+                    <h4>${product.price}</h4>
+                  </div>
+                )
+              })}
+
+            </div>
+           </div>
+          <button>Checkout</button>
         </div>
       </div>
     </div>
