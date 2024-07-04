@@ -45,6 +45,15 @@ const Cart = () => {
     setUserCart(updatedCart);
   };
 
+  const removeFromCart = async (productId) => {
+      try{
+        const response = await axios.delete(`http://localhost:5000/users/cart/${userID}/${productId}`)
+        fetchUserCart()
+      } catch (error) {
+        console.log(error);
+      }
+  };
+
   return (
     <div className="cart-container">
       <div className="back-to-home-btn">
@@ -65,7 +74,7 @@ const Cart = () => {
                   <div className="plain-text">
                     <div className="name-n-price product-text">
                       <h3>{product.name}</h3>
-                      <p>${(product.price).toFixed(2)}</p>
+                      <p>${product.price.toFixed(2)}</p>
                     </div>
                     <div className="details product-text">
                       <p>{product.description}</p>
@@ -83,7 +92,12 @@ const Cart = () => {
                         }
                       />
                     </div>
-                    <button className="CartBtn">Remove from cart</button>
+                    <button
+                      onClick={() => removeFromCart(product._id)}
+                      className="CartBtn"
+                    >
+                      Remove from cart
+                    </button>
                   </div>
                 </div>
               </div>
@@ -98,7 +112,9 @@ const Cart = () => {
               {userCart.map((product) => {
                 return (
                   <div className="checkout-product">
-                    <h4>{product.name} x {product.quantity}</h4>
+                    <h4>
+                      {product.name} x {product.quantity}
+                    </h4>
                     <h4>${(product.price * product.quantity).toFixed(2)}</h4>
                   </div>
                 );
@@ -106,9 +122,19 @@ const Cart = () => {
             </div>
           </div>
           <div className="total-price">
-            <h1>Total: ${userCart.reduce((acc, product) => acc + product.price * product.quantity, 0).toFixed(2)}</h1>
+            <h1>
+              Total: $
+              {userCart
+                .reduce(
+                  (acc, product) => acc + product.price * product.quantity,
+                  0
+                )
+                .toFixed(2)}
+            </h1>
           </div>
-          <button>Checkout</button>
+          <div className="checkout-btn-container">
+            <button className="CartBtn">Checkout</button>
+          </div>
         </div>
       </div>
     </div>

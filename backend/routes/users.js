@@ -82,7 +82,7 @@ router.get("/cart/:userID", async (req, res) => {
     console.log(error);
   }
 });
-
+//getting user cart
 router.get("/userCart/:userID", async (req, res) => {
   try {
     const user = await UserModel.findById(req.params.userID);
@@ -94,6 +94,19 @@ router.get("/userCart/:userID", async (req, res) => {
     console.log(err);
   }
 })
+// deleting product from userCart
+
+router.delete("/cart/:userID/:productId", async (req, res) => {
+  try {
+    const user = await UserModel.findByIdAndUpdate(req.params.userID, {
+      $pull: { userCart: req.params.productId },
+    });
+    res.json({ userCart: user.userCart });
+  } catch (error) {
+    console.log(error);
+  }
+});
+
 router.put("/number", async (req, res) => {
   try {
     const user = await UserModel.findById(req.body.userId);

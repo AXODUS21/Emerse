@@ -62,8 +62,10 @@
 .checkout-container{
     margin-left: 10px;
     padding: 7px;
+    height: fit-content;
     text-align: center;
     border: 1px gray solid;
+    padding-bottom: 20px;
 }
 .checkout-container h1{
     margin-bottom: 20px;
@@ -78,4 +80,11 @@
     display: flex;
     gap: 20px;
     justify-content: space-between;
+}
+.checkout-btn-container{
+    display: flex;
+    justify-content: center;
+}
+.total-price{
+    margin-top: 20px;
 }
