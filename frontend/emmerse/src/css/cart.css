@@ -88,3 +88,28 @@
 .total-price{
     margin-top: 20px;
 }
+.shipping-options{
+    display: grid;
+    gap: 10px;
+    border-bottom: 1px gray solid;
+    padding: 7px;
+}
+.options{
+    display: grid;
+    gap: 10px;
+}
+.standard-shipping{
+    display: flex;
+    justify-content: space-between;
+}
+.fast-shipping{
+    display: flex;
+    gap: 5px;
+}
+.fast-shipping input{
+    width: 20px;
+    cursor: pointer;
+}
+.date{
+    display: flex;
+}

@@ -2,12 +2,18 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import useGetUserId from '../hooks/getUserId'
 import {useNavigate} from'react-router-dom'
+import dayjs from 'dayjs'
 import '../css/cart.css'
 
 const Cart = () => {
   const userID = useGetUserId();
   const [userCart, setUserCart] = useState([]);
   const navigate = useNavigate();
+  const [fastShipping, setFastShipping] = useState(false);
+  const [daysToAdd, setDaysToAdd] = useState()
+  const today = dayjs()
+  const deliveryDate = today.add(daysToAdd, "days")
+  const dateString = deliveryDate.format("dddd, MMMM D")
 
   const fetchUserCart = async () => {
     if (!userID) {
@@ -53,6 +59,18 @@ const Cart = () => {
         console.log(error);
       }
   };
+
+  const setDeliveryDate = () => {
+    if(!fastShipping) {
+      setDaysToAdd(5)
+    } else {
+      setDaysToAdd(2)
+    }
+  }
+
+  useEffect(() => {
+    setDeliveryDate()
+  },[fastShipping])
 
   return (
     <div className="cart-container">
@@ -121,12 +139,36 @@ const Cart = () => {
               })}
             </div>
           </div>
+
+          <div className="shipping-options">
+            <h3>Shipping Options</h3>
+            <div className="options">
+              <div className="standard-shipping">
+                <h4>{fastShipping ? "Fast" : "Standard"} Shipping</h4>
+                <h4>${fastShipping ? "9.00" : "4.00"}</h4>
+              </div>
+              <div className="date">
+                {dateString}
+              </div>
+              <div className="fast-shipping">
+                <input
+                  onChange={() => setFastShipping((prev) => !prev)}
+                  type="checkbox"
+                />
+                Fast Shipping
+              </div>
+            </div>
+          </div>
+
           <div className="total-price">
             <h1>
               Total: $
               {userCart
                 .reduce(
-                  (acc, product) => acc + product.price * product.quantity,
+                  (acc, product) =>
+                    acc +
+                    product.price * product.quantity +
+                    (fastShipping ? 9 : 4),
                   0
                 )
                 .toFixed(2)}
