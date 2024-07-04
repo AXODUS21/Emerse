@@ -1,4 +1,33 @@
 .detail-title{
     display: flex;
     justify-content: center ;
+    margin-bottom: 20px;
+}
+.details-product{
+    display: grid;
+    place-items: center;
+    gap: 20px;
+}
+.details-product img{
+    border: 1px solid;
+    padding: 2.5px;
+}
+.details-product p {
+    width: 30vw;
+}
+.details-product-info{
+    display: flex;
+    border: 1px solid ;
+}
+.details-name-and-price{
+    text-transform: capitalize;
+    border: 1px solid;
+    padding: 10px;
+}
+.details-name-and-price h1{
+    margin-bottom: 10px;
+}
+.details-product-description{
+    border: 0.01em solid;
+    padding: 10px;
 }
