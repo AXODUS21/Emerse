@@ -16,13 +16,16 @@ import rating50 from '../Images/ratings/rating-50.png'
 import useGetUserId from '../hooks/getUserId'
 import cartIcon from '../Images/shopping-icon.svg'
 import { useNavigate } from 'react-router-dom'
-import Details from './details'
 
+// todo: add a functionality for when the user clicks on the add to cart button the function also detects
+// if the product is already in the cart
 const Store = () => {
   const [products, setProducts] = useState([])
   const userID = useGetUserId()
   const [userCartAmount, setUserCartAmount] = useState([])
   const navigate = useNavigate()
+  const [stateChange, setStateChange] = useState(false)
+  const [userCart, setUserCart] = useState()
 
 
   const ratingsMap = {
@@ -49,14 +52,19 @@ const Store = () => {
       alert('Please login to add products to your cart')
       return;
     }
-    try{
-       const response = await axios.put(`http://localhost:5000/products`, {
-         userID,
-         id,
-       });
-    } catch(err){
-      console.log(err)
+    if(detectDouble(id)){
+      alert("Product is already in your cart")
+      return;
     }
+      try {
+        const response = await axios.put(`http://localhost:5000/products`, {
+          userID,
+          id,
+        });
+        setStateChange((prev) => !prev);
+      } catch (err) {
+        console.log(err);
+      }
   }
 
   const getCartamount = async () => {
@@ -65,9 +73,18 @@ const Store = () => {
     }
     try{
       const response = await axios.get(`http://localhost:5000/users/cart/${userID}`)
+      setUserCart(response.data)
       setUserCartAmount(response.data.length)
     } catch(err){
       console.log(err)
+    }
+  }
+
+  const detectDouble = (id) => {
+    for (let i = 0; i < userCart.length; i++) {
+      if (userCart[i] === id){
+        return true
+      }
     }
   }
 
@@ -77,7 +94,7 @@ const Store = () => {
   
   useEffect(() => {
     getCartamount();
-  }, [addToCart]);
+  }, [stateChange]);
 
   return (
     <div className="store-container">
