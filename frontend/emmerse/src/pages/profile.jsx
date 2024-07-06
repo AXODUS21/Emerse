@@ -100,6 +100,7 @@ const Profile = () => {
           <input
             type="text"
             name="contactNumber"
+            className="input"
             placeholder="Change your contact number"
             onChange={handleInputChange}
           />
@@ -108,9 +109,10 @@ const Profile = () => {
             type="text"
             name="address"
             placeholder="Change your address"
+            className="input"
             onChange={handleInputChange}
           />
-          <button onClick={saveChanges}>Save</button>
+          <button className="save-button" onClick={saveChanges}>Save</button>
         </div>
       )}
 
