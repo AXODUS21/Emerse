@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { PayPalButton } from "react-paypal-button-v2";
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import useGetUserId from "../hooks/getUserId";
 import { useNavigate } from "react-router-dom";
-import dayjs from "dayjs";
+import { DateTime } from "luxon";
 import "../css/cart.css";
 
 const Cart = () => {
@@ -12,12 +12,10 @@ const Cart = () => {
   const navigate = useNavigate();
   const [fastShipping, setFastShipping] = useState(false);
   const [daysToAdd, setDaysToAdd] = useState();
-  const today = dayjs();
-  const deliveryDate = today.add(daysToAdd, "days");
-  const dateString = deliveryDate.format("dddd, MMMM D");
-  const [sdkReady, setSdkReady] = useState(false);
-  const [initialized, setInitialized] = useState(false);
-  const [addClassName, setAddClassName] = useState(false);
+  const today = DateTime.local();
+  const deliveryDate = today.plus({ days: daysToAdd });
+  const dateString = deliveryDate.toFormat("cccc, LLLL d");
+  const [clientId, setClientId] = useState("");
 
   const fetchUserCart = async () => {
     if (!userID) {
@@ -40,26 +38,20 @@ const Cart = () => {
   };
 
   useEffect(() => {
-    const addPaypalScript = async () => {
-      const { data: clientId } = await axios.get(
-        "http://localhost:5000/api/config/paypal"
-      );
-      const script = document.createElement("script");
-      script.type = "text/javascript";
-      script.src = `https://www.paypal.com/sdk/js?client-id=${clientId}`;
-      script.async = true;
-      script.onload = () => {
-        setSdkReady(true);
-      };
-      document.body.appendChild(script);
+    const fetchPaypalClientId = async () => {
+      try {
+        const { data: clientId } = await axios.get(
+          "http://localhost:5000/api/config/paypal"
+        );
+        setClientId(clientId);
+      } catch (error) {
+        console.error("Failed to fetch PayPal client ID:", error);
+      }
     };
 
-    if (!initialized) {
-      fetchUserCart();
-      addPaypalScript();
-      setInitialized(true);
-    }
-  }, [initialized]);
+    fetchUserCart();
+    fetchPaypalClientId();
+  }, [userID]);
 
   const changeQuantity = async (productId, newQuantity) => {
     const updatedCart = userCart.map((product) => {
@@ -117,9 +109,7 @@ const Cart = () => {
                     <p>${product.price.toFixed(2)}</p>
                   </div>
                   <div className="details product-text">
-                    <p>
-                      {product.description}
-                    </p>
+                    <p>{product.description}</p>
                   </div>
                 </div>
                 <div className="item-buttons">
@@ -194,18 +184,31 @@ const Cart = () => {
             </h1>
           </div>
           <div className="checkout-btn-container">
-            <PayPalButton
-              amount={userCart
-                .reduce(
-                  (acc, product) =>
-                    acc +
-                    product.price * product.quantity +
-                    (fastShipping ? 9 : 4),
-                  0
-                )
-                .toFixed(2)}
-              onSuccess={successPaymentHandler}
-            />
+            {clientId && (
+              <PayPalScriptProvider options={{ "client-id": clientId }}>
+                <PayPalButtons
+                  createOrder={(data, actions) => {
+                    return actions.order.create({
+                      purchase_units: [
+                        {
+                          amount: {
+                            value: userCart
+                              .reduce(
+                                (acc, product) =>
+                                  acc +
+                                  product.price * product.quantity +
+                                  (fastShipping ? 9 : 4),
+                                0
+                              )
+                              .toFixed(2),
+                          },
+                        },
+                      ],
+                    });
+                  }}
+                />
+              </PayPalScriptProvider>
+            )}
           </div>
         </div>
       </div>

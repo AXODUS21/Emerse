@@ -10,11 +10,11 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@paypal/react-paypal-js": "^8.5.0",
     "axios": "^1.7.2",
-    "dayjs": "^1.11.11",
+    "luxon": "^3.4.4",
     "react": "^18.2.0",
     "react-cookie": "^7.1.4",
-    "react-dayjs": "^0.3.2",
     "react-dom": "^18.2.0",
     "react-paypal-button-v2": "^2.6.3",
     "react-router-dom": "^6.23.1"
