@@ -116,7 +116,7 @@ const Store = () => {
 
       <div className="store">
         <div className="store-title">
-          <h1>Store</h1>
+          <h1>STORE</h1>
         </div>
 
         <div className="products-container">

@@ -3,15 +3,17 @@
     justify-content: space-between;
 }
 .info{
+    font-family: "kanit";
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 18px;
     padding-left: 15px;
 }
 .recent-purchases-container{
     height: 60vh;
 }
 .recent-purchases-title{
+    font-family: "Space Grotesk", sans-serif;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -95,6 +97,7 @@
   transform: translate(2px ,2px);
 }
 .user-data{
+    gap: 3px;
     display: grid;
 }
 .edit-button {

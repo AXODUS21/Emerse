@@ -17,7 +17,7 @@
 .left{
     display: grid;
     gap: 100px;
-    position: relative;
+    position: relative; 
 }
 .left img{
     filter: drop-shadow(1px 0px 10px#14a0ff);
@@ -25,6 +25,10 @@
     height: 38vw;
 }
 .moto{
+    font-family: "Kanit", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: rgb(255, 255, 255);
     display: grid;
     gap: 50px;
     margin-bottom: 50px;
@@ -72,12 +76,19 @@
 }
 
 .navbar{
+    font-family: "Kanit", sans-serif;
+    font-weight: 500;
+    font-style: normal;
     display: flex;
     position: absolute;
     right: 0;
     gap: 22.3vw;
 }
 .navbar h1{
+    font-family: "Kanit", sans-serif;
+    font-weight: 700;
+    color: white;
+    font-style: normal;
     font-size: 4vw;
     display: flex;
     align-items: center;
@@ -97,13 +108,13 @@
     gap: 10px;
     align-items: center;
     text-decoration: none;
-    color: black;
+    color: white;
 }
 .profile{
     padding-right: 20px;
 }
 .profile img{
-    height: 3vw;
+    height: 2.8vw;
 }
 .shop-button a{
     text-decoration: none;

@@ -17,6 +17,7 @@ const Cart = () => {
   const dateString = deliveryDate.format("dddd, MMMM D");
   const [sdkReady, setSdkReady] = useState(false);
   const [initialized, setInitialized] = useState(false);
+  const [addClassName, setAddClassName] = useState(false);
 
   const fetchUserCart = async () => {
     if (!userID) {
@@ -100,7 +101,7 @@ const Cart = () => {
         <button onClick={() => navigate(-1)}>&#8592; Return</button>
       </div>
       <div className="cart-title">
-        <h1>Cart</h1>
+        <h1>CART</h1>
       </div>
       <div className="cart">
         <div className="user-cart">
@@ -116,7 +117,9 @@ const Cart = () => {
                     <p>${product.price.toFixed(2)}</p>
                   </div>
                   <div className="details product-text">
-                    <p>{product.description}</p>
+                    <p>
+                      {product.description}
+                    </p>
                   </div>
                 </div>
                 <div className="item-buttons">

@@ -85,7 +85,7 @@ const Login = () => {
         window.localStorage.setItem("userID", response.data.userID); //putting the id of the user in the lcoal host
         if (window.localStorage.getItem("userID") === "undefined") {
           alert(
-            "This account does not exist please register your account first"
+            "Wrong Username or Password"
           );
           return;
         }
