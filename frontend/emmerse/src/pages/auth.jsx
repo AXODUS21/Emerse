@@ -90,9 +90,9 @@ const Login = () => {
           );
           return;
         }
-        window.location.reload();
-        alert("You are now logged in");
         
+        alert("You are now logged in");
+        navigate("/")
       } catch (err) {
         console.log(err);
       }
