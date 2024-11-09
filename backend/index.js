@@ -12,7 +12,7 @@ dotenv.config();
 
 app.use(
   cors({
-    origin: "https://emerse.netlify.app/", // Allow requests from Netlify domain
+    origin: "https://emerse.netlify.app", // Allow requests from Netlify domain
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers for cross-origin requests
     credentials: true, // Enable cookies and authentication headers (if needed)
