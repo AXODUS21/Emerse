@@ -46,7 +46,8 @@ const Store = () => {
     const response = await axios.get(
       `${process.env.REACT_APP_API_URL}/products`
     );
-    setProducts(response.data)
+    console.log("Request URL:", url); // Log the URL
+    setProducts(response.data);
   }
 
   const addToCart = async (id) => {
@@ -80,6 +81,7 @@ const Store = () => {
       const response = await axios.get(
         `${process.env.REACT_APP_API_URL}/users/cart/${userID}`
       );
+      
       setUserCart(response.data)
       setUserCartAmount(response.data.length)
     } catch(err){
