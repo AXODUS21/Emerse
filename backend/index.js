@@ -8,13 +8,11 @@ import { userRouter } from "./routes/users.js";
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-const allowedOrigin = process.env.CORS_ORIGIN || "https://emerse.netlify.app";
-
 dotenv.config();
 
 app.use(
   cors({
-    origin: allowedOrigin, // Allow requests from Netlify domain
+    origin: "https://emerse.netlify.app/", // Allow requests from Netlify domain
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers for cross-origin requests
     credentials: true, // Enable cookies and authentication headers (if needed)
