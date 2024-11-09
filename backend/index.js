@@ -6,11 +6,16 @@ import { productRouter } from "./routes/products.js"
 import { userRouter } from "./routes/users.js"
 
 const app = express()
+const PORT = process.env.PORT || 5000
+const allowedOrigin = process.env.CORS_ORIGIN || 'https://emerse.netlify.app';
 
 dotenv.config();
 
 app.use(express.json())
-app.use(cors())
+app.use(cors({
+  origin: allowedOrigin,
+  credentials: true // Set to true if you need cookies/authentication
+}));
 app.use("/products", productRouter)
 app.use("/users", userRouter)
 app.get("/api/config/paypal", (req, res) =>
@@ -18,8 +23,8 @@ app.get("/api/config/paypal", (req, res) =>
 );
 mongoose.connect(process.env.MONGODB_CONNECTION_KEY).then(() => {
   console.log("MongoDB connected");
-  app.listen(5000, () => {
-    console.log("listening on localhost 5000");
+  app.listen(PORT, () => {
+    console.log(`listening on localhost ${PORT}`);
   });
 });
 
