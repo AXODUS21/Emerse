@@ -36,7 +36,6 @@ const Auth = () => {
 const Register = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate();
 
     const onSubmit = async (event) => {
       event.preventDefault();
