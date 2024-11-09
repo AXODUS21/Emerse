@@ -48,7 +48,6 @@ const Store = () => {
     const response = await axios.get(
       `${import.meta.env.VITE_API_URL}/products`
     );
-    console.log("Request URL:", url); // Log the URL
     setProducts(response.data);
   }
 
