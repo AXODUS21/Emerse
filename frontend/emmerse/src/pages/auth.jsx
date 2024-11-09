@@ -35,6 +35,7 @@ const Auth = () => {
 const Register = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+      const navigate = useNavigate();
 
     const onSubmit = async (event) => {
       event.preventDefault();
@@ -44,8 +45,9 @@ const Register = () => {
           password,
         });
 
-        window.location.reload();
+        
         alert("You have been succesfully registered, Please Login using your new account!");
+        navigate("/auth")
       } catch (err) {
         console.error(err);
       }

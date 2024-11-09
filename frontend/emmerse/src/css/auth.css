@@ -1,4 +1,7 @@
 /*AUTH CSS*/
+*{
+    text-decoration: none;
+}
 .auth-container{
     height: 80vh;
 }
