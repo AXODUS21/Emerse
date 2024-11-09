@@ -17,7 +17,9 @@ const Profile = () => {
   const [editMode, setEditMode] = useState(false)
 
   const fetchUserData = async () => {
-    const response = await axios.get(`http://localhost:5000/users/${userID}`);
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_URL}/users/${userID}`
+    );
     setUserData(response.data);
     setEditedUserData({ ...response.data });
   };
@@ -39,7 +41,10 @@ const Profile = () => {
   };
 
   const saveChanges = async () => {
-    await axios.put(`http://localhost:5000/users/${userID}`, editedUserData);
+    await axios.put(
+      `${process.env.REACT_APP_API_URL}/users/${userID}`,
+      editedUserData
+    );
     setUserData(editedUserData);
     setEditMode(false);
   };
@@ -50,7 +55,7 @@ const Profile = () => {
     }
     try {
       const response = await axios.get(
-        `http://localhost:5000/users/cart/${userID}`
+        `${process.env.REACT_APP_API_URL}/users/cart/${userID}`
       );
       setUserCartAmount(response.data.length);
     } catch (err) {

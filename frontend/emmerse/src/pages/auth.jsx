@@ -7,7 +7,6 @@ import useGetUserId from '../hooks/getUserId'
 import Profile from './profile'
 
 
-
 const Auth = () => {
   const userID = useGetUserId()
   
@@ -40,7 +39,7 @@ const Register = () => {
     const onSubmit = async (event) => {
       event.preventDefault();
       try {
-        await axios.post("http://localhost:5000/users/register", {
+        await axios.post(`${process.env.REACT_APP_API_URL}/users/register`, {
           username,
           password,
         });
@@ -75,10 +74,13 @@ const Login = () => {
       e.preventDefault();
 
       try {
-        const response = await axios.post("http://localhost:5000/users/login", {
-          username,
-          password,
-        });
+        const response = await axios.post(
+          `${process.env.REACT_APP_API_URL}/users/login`,
+          {
+            username,
+            password,
+          }
+        );
 
         setCookies("access_token", response.data.token); // takes the data.token and sets it in the variable access token that the function turns into a cookie
         window.localStorage.setItem("userID", response.data.userID); //putting the id of the user in the lcoal host

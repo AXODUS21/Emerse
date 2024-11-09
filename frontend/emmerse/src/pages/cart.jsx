@@ -25,7 +25,7 @@ const Cart = () => {
     }
     try {
       const response = await axios.get(
-        `http://localhost:5000/users/userCart/${userID}`
+        `${process.env.REACT_APP_API_URL}/users/userCart/${userID}`
       );
       setUserCart(addQuantityToProduct(response.data.userCart));
     } catch (err) {
@@ -41,7 +41,7 @@ const Cart = () => {
     const fetchPaypalClientId = async () => {
       try {
         const { data: clientId } = await axios.get(
-          "http://localhost:5000/api/config/paypal"
+          `${process.env.REACT_APP_API_URL}/api/config/paypal`
         );
         setClientId(clientId);
       } catch (error) {
@@ -66,7 +66,7 @@ const Cart = () => {
   const removeFromCart = async (productId) => {
     try {
       await axios.delete(
-        `http://localhost:5000/users/cart/${userID}/${productId}`
+        `${process.env.REACT_APP_API_URL}/users/cart/${userID}/${productId}`
       );
       fetchUserCart();
     } catch (error) {

@@ -15,7 +15,9 @@ const Details = () => {
 
     const getProductDetails = async () => {
         try {
-            const response = await axios.get(`http://localhost:5000/products/details/${productID}`,)
+            const response = await axios.get(
+              `${process.env.REACT_APP_API_URL}/products/details/${productID}`
+            );
             setProduct(response.data.product)
             console.log(response.data.product)
         } catch (err) {

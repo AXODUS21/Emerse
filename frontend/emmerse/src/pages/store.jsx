@@ -43,7 +43,9 @@ const Store = () => {
   };
 
   const getProducts = async () => {
-    const response = await axios.get('http://localhost:5000/products')
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_URL}/products`
+    );
     setProducts(response.data)
   }
 
@@ -57,10 +59,13 @@ const Store = () => {
       return;
     }
       try {
-        const response = await axios.put(`http://localhost:5000/products`, {
-          userID,
-          id,
-        });
+        const response = await axios.put(
+          `${process.env.REACT_APP_API_URL}/products`,
+          {
+            userID,
+            id,
+          }
+        );
         setStateChange((prev) => !prev);
       } catch (err) {
         console.log(err);
@@ -72,7 +77,9 @@ const Store = () => {
       return;
     }
     try{
-      const response = await axios.get(`http://localhost:5000/users/cart/${userID}`)
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_URL}/users/cart/${userID}`
+      );
       setUserCart(response.data)
       setUserCartAmount(response.data.length)
     } catch(err){
