@@ -16,7 +16,7 @@ const Details = () => {
     const getProductDetails = async () => {
         try {
             const response = await axios.get(
-              `${process.env.REACT_APP_API_URL}/products/details/${productID}`
+              `${import.meta.env.VITE_API_URL}/products/details/${productID}`
             );
             setProduct(response.data.product)
             console.log(response.data.product)

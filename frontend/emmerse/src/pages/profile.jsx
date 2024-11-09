@@ -18,7 +18,7 @@ const Profile = () => {
 
   const fetchUserData = async () => {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}/users/${userID}`
+      `${import.meta.env.VITE_API_URL}/users/${userID}`
     );
     setUserData(response.data);
     setEditedUserData({ ...response.data });
@@ -42,7 +42,7 @@ const Profile = () => {
 
   const saveChanges = async () => {
     await axios.put(
-      `${process.env.REACT_APP_API_URL}/users/${userID}`,
+      `${import.meta.env.VITE_API_URL}/users/${userID}`,
       editedUserData
     );
     setUserData(editedUserData);
@@ -55,7 +55,7 @@ const Profile = () => {
     }
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/users/cart/${userID}`
+        `${import.meta.env.VITE_API_URL}/users/cart/${userID}`
       );
       setUserCartAmount(response.data.length);
     } catch (err) {

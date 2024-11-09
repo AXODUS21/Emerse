@@ -42,9 +42,11 @@ const Store = () => {
     5: rating50,
   };
 
+  console.log(import.meta.env.VITE_API_URL);
+
   const getProducts = async () => {
     const response = await axios.get(
-      `${process.env.REACT_APP_API_URL}/products`
+      `${import.meta.env.VITE_API_URL}/products`
     );
     console.log("Request URL:", url); // Log the URL
     setProducts(response.data);
@@ -61,7 +63,7 @@ const Store = () => {
     }
       try {
         const response = await axios.put(
-          `${process.env.REACT_APP_API_URL}/products`,
+          `${import.meta.env.VITE_API_URL}/products`,
           {
             userID,
             id,
@@ -79,7 +81,7 @@ const Store = () => {
     }
     try{
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/users/cart/${userID}`
+        `${import.meta.env.VITE_API_URL}/users/cart/${userID}`
       );
       
       setUserCart(response.data)

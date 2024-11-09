@@ -39,7 +39,7 @@ const Register = () => {
     const onSubmit = async (event) => {
       event.preventDefault();
       try {
-        await axios.post(`${process.env.REACT_APP_API_URL}/users/register`, {
+        await axios.post(`${import.meta.env.VITE_API_URL}/users/register`, {
           username,
           password,
         });
@@ -75,7 +75,7 @@ const Login = () => {
 
       try {
         const response = await axios.post(
-          `${process.env.REACT_APP_API_URL}/users/login`,
+          `${import.meta.env.VITE_API_URL}/users/login`,
           {
             username,
             password,
