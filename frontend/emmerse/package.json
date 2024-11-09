@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "npm install --legacy-peer-deps && vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
@@ -16,7 +16,6 @@
     "react": "^18.2.0",
     "react-cookie": "^7.1.4",
     "react-dom": "^18.2.0",
-    "react-paypal-button-v2": "^2.6.3",
     "react-router-dom": "^6.23.1"
   },
   "devDependencies": {
